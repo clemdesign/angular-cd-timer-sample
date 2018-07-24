@@ -9,12 +9,22 @@
   <app-timer class="bootstrap-timer" [startTime]="10" maxTimeUnit="day">[hours]h [minutes]m [seconds]s</app-timer>
 </p>
 <p>
-  <app-timer class="bootstrap-timer" format="hms">[hours]h [minutes]m [seconds]s</app-timer>
+  <app-timer class="bootstrap-timer" format="hms"></app-timer>
 </p>
 <p>
-  <app-timer class="bootstrap-timer" format="default">[hours]h [minutes]m [seconds]s</app-timer>
+  <app-timer class="bootstrap-timer" format="default"></app-timer>
 </p>
 <p>
-  <app-timer class="bootstrap-timer" format="intelli" [startTime]="25" [countdown]="true">[hours]h [minutes]m [seconds]s</app-timer>
+  <app-timer class="bootstrap-timer" format="intelli" [startTime]="25" [countdown]="true"></app-timer>
+</p>
+<p>
+  <app-timer
+    class="bootstrap-timer"
+    format="hms"
+    [startTime]="10"
+    [endTime]="20"
+    (onComplete)="onComplete($event)"
+    (onTick)="onTick($event)"
+  ></app-timer> <span>{{timerInfo}}</span>
 </p>
 

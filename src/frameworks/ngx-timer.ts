@@ -1,6 +1,7 @@
 
 import {
-  AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, Output, Renderer2
+  AfterViewInit,
+  Component, ElementRef, EventEmitter, Input, OnDestroy, Output, Renderer2
 } from '@angular/core';
 
 export interface TimeInterface {
@@ -14,7 +15,7 @@ export interface TimeInterface {
 
 @Component({
   selector: 'app-timer',
-  template: '<ng-content></ng-content>'
+  template: ' <ng-content></ng-content>'
 })
 export class TimerComponent implements AfterViewInit, OnDestroy {
   private timeoutId: any;
@@ -64,7 +65,7 @@ export class TimerComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    this.ngContentNode = this.elt.nativeElement.childNodes[0];
+    this.ngContentNode = this.elt.nativeElement.childNodes[1] ? this.elt.nativeElement.childNodes[1] : this.elt.nativeElement.childNodes[0];
     this.ngContentSchema = this.ngContentNode.nodeValue;
     if (this.autoStart === undefined || this.autoStart === true) {
       this.start();
