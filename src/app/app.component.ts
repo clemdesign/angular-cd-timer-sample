@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import {TimeInterface} from '../frameworks/cd-timer';
+import {Component, ViewChild} from '@angular/core';
+import {CdTimerComponent, TimeInterface} from '../frameworks/cd-timer';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +7,7 @@ import {TimeInterface} from '../frameworks/cd-timer';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  @ViewChild('basicTimer') basicTimer: CdTimerComponent;
 
   timerInfo = '';
 
@@ -25,5 +25,22 @@ export class AppComponent {
 
   onStart(data) {
     console.log('Started.');
+  }
+
+  doActionBasicTimer(action: String) {
+    switch (action) {
+      case 'start':
+        this.basicTimer.start();
+        break;
+      case 'resume':
+        this.basicTimer.resume();
+        break;
+      case 'reset':
+        this.basicTimer.reset();
+        break;
+      default:
+        this.basicTimer.stop();
+        break;
+    }
   }
 }

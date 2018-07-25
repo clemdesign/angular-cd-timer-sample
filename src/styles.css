@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  font-family: Arial, Tahoma, Verdana;
+  font-size: 16px;
+}
+
+code {
+  padding: 2px 4px;
+  color: #d14;
+  white-space: nowrap;
+  background-color: #f7f7f9;
+  border: 1px solid #e1e1e8;
+}
