@@ -1,16 +1,16 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {TimerComponent} from './ngx-timer';
+import {CdTimerComponent} from './cd-timer';
 
 @NgModule({
   imports: [
     CommonModule
   ],
   declarations: [
-    TimerComponent
+    CdTimerComponent
   ],
   exports: [
-    TimerComponent
+    CdTimerComponent
   ]
 })
-export class NgxTimerModule {}
+export class CdTimerModule {}

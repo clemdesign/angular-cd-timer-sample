@@ -14,10 +14,10 @@ export interface TimeInterface {
 }
 
 @Component({
-  selector: 'app-timer',
+  selector: 'cd-timer',
   template: ' <ng-content></ng-content>'
 })
-export class TimerComponent implements AfterViewInit, OnDestroy {
+export class CdTimerComponent implements AfterViewInit, OnDestroy {
   private timeoutId: any;
   private isRunning: boolean;
   private tickCounter: number;
@@ -35,10 +35,10 @@ export class TimerComponent implements AfterViewInit, OnDestroy {
   @Input() autoStart: boolean;
   @Input() maxTimeUnit: string;
   @Input() format: string;
-  @Output() onStart: EventEmitter<TimerComponent>;
-  @Output() onStop: EventEmitter<TimerComponent>;
+  @Output() onStart: EventEmitter<CdTimerComponent>;
+  @Output() onStop: EventEmitter<CdTimerComponent>;
   @Output() onTick: EventEmitter<TimeInterface>;
-  @Output() onComplete: EventEmitter<TimerComponent>;
+  @Output() onComplete: EventEmitter<CdTimerComponent>;
 
   constructor(private elt: ElementRef, private renderer: Renderer2) {
     // Initialization
@@ -46,14 +46,6 @@ export class TimerComponent implements AfterViewInit, OnDestroy {
     this.onComplete = new EventEmitter();
     this.onStop     = new EventEmitter();
     this.onTick     = new EventEmitter();
-
-    // Checking for trim function since IE8 doesn't have it
-    // If not a function, create tirm with RegEx to mimic native trim
-    if (typeof String.prototype.trim !== 'function') {
-      String.prototype.trim = function () {
-        return this.replace(/^\s+|\s+$/g, '');
-      };
-    }
 
     this.autoStart  = true;
     this.startTime  = null;
@@ -77,6 +69,9 @@ export class TimerComponent implements AfterViewInit, OnDestroy {
     this.isRunning = false;
   }
 
+  /**
+   * Start the timer
+   */
   public start() {
     this.initVar();
     this.resetTimeout();
@@ -86,29 +81,49 @@ export class TimerComponent implements AfterViewInit, OnDestroy {
     this.onStart.emit(this);
   }
 
+  /**
+   * Resume the timer
+   */
   public resume() {
     this.resetTimeout();
-
-    if (this.countdown) {
-      this.tickCounter += 1;
-    }
 
     this.tick(this);
     this.isRunning = true;
   }
 
+  /**
+   * Stop the timer
+   */
   public stop() {
     this.clear();
 
     this.onStop.emit(this);
   }
 
+  /**
+   * Reset the timer
+   */
   public reset() {
     this.initVar();
     this.resetTimeout();
     this.tick(this);
     this.clear();
     this.isRunning = false;
+  }
+
+  /**
+   * Get the time information
+   * @returns TimeInterface
+   */
+  public get() {
+    return {
+      seconds: this.seconds,
+      minutes: this.minutes,
+      hours: this.hours,
+      days: this.days,
+      timer: this.timeoutId,
+      tick_count: this.tickCounter
+    };
   }
 
   private initVar() {
@@ -213,7 +228,7 @@ export class TimerComponent implements AfterViewInit, OnDestroy {
     this.renderText();
   }
 
-  protected tick (that: TimerComponent) {
+  protected tick (that: CdTimerComponent) {
     let counter;
 
     if (this.countdown) {

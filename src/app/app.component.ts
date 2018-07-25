@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {TimeInterface} from '../frameworks/ngx-timer';
+import {TimeInterface} from '../frameworks/cd-timer';
 
 @Component({
   selector: 'app-root',

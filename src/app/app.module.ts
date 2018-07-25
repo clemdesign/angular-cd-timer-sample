@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
-import {NgxTimerModule} from '../frameworks/ngx-timer.module';
+import {CdTimerModule} from '../frameworks/cd-timer.module';
 
 
 @NgModule({
@@ -12,7 +12,7 @@ import {NgxTimerModule} from '../frameworks/ngx-timer.module';
   ],
   imports: [
     BrowserModule,
-    NgxTimerModule
+    CdTimerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
