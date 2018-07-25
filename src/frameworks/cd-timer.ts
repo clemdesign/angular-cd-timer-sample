@@ -75,7 +75,7 @@ export class CdTimerComponent implements AfterViewInit, OnDestroy {
   public start() {
     this.initVar();
     this.resetTimeout();
-    this.tick(this);
+    this.startTickCount();
     this.isRunning = true;
 
     this.onStart.emit(this);
@@ -87,7 +87,7 @@ export class CdTimerComponent implements AfterViewInit, OnDestroy {
   public resume() {
     this.resetTimeout();
 
-    this.tick(this);
+    this.startTickCount();
     this.isRunning = true;
   }
 
@@ -106,7 +106,7 @@ export class CdTimerComponent implements AfterViewInit, OnDestroy {
   public reset() {
     this.initVar();
     this.resetTimeout();
-    this.tick(this);
+    this.startTickCount();
     this.clear();
     this.isRunning = false;
   }
@@ -228,56 +228,54 @@ export class CdTimerComponent implements AfterViewInit, OnDestroy {
     this.renderText();
   }
 
-  protected tick (that: CdTimerComponent) {
-    let counter;
+  protected startTickCount () {
+    const that = this;
 
-    if (this.countdown) {
-      // Compute finish counter for countdown
-      counter = that.tickCounter;
+    that.timeoutId = setInterval(function() {
+      let counter;
 
-      if (that.startTime > that.endTime) {
-        counter = that.tickCounter - that.endTime - 1;
+      if (that.countdown) {
+        // Compute finish counter for countdown
+        counter = that.tickCounter;
+
+        if (that.startTime > that.endTime) {
+          counter = that.tickCounter - that.endTime - 1;
+        }
+      } else {
+        // Compute finish counter for timer
+        counter = that.tickCounter - that.startTime;
+
+        if (that.endTime > that.startTime) {
+          counter = that.endTime - that.tickCounter - 1;
+        }
       }
-    } else {
-      // Compute finish counter for timer
-      counter = that.tickCounter - that.startTime;
 
-      if (that.endTime > that.startTime) {
-        counter = that.endTime - that.tickCounter - 1;
-      }
-    }
-
-    if (counter < 0) {
-      that.stop();
       that.calculateTimeUnits();
 
-      this.onComplete.emit(this);
-      return;
-    }
+      const timer: TimeInterface = {
+        seconds: that.seconds,
+        minutes: that.minutes,
+        hours: that.hours,
+        days: that.days,
+        timer: that.timeoutId,
+        tick_count: that.tickCounter
+      };
 
-    that.calculateTimeUnits();
+      that.onTick.emit(timer);
 
-    if (this.countdown) {
-      that.tickCounter--;
-    } else {
-      that.tickCounter++;
-    }
+      if (counter < 0) {
+        that.stop();
 
-    that.timeoutId = setTimeout(function() {
-      that.tick(that);
+        that.onComplete.emit(that);
+        return;
+      }
+
+      if (that.countdown) {
+        that.tickCounter--;
+      } else {
+        that.tickCounter++;
+      }
     }, 1000); // Each seconds
-
-    const timer: TimeInterface = {
-      seconds: this.seconds,
-      minutes: this.minutes,
-      hours: this.hours,
-      days: this.days,
-      timer: this.timeoutId,
-      tick_count: this.tickCounter
-    };
-
-    this.onTick.emit(timer);
-
   }
 
 }

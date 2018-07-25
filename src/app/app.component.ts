@@ -20,11 +20,11 @@ export class AppComponent {
   }
 
   onTick(data: TimeInterface) {
-    console.log('In Progress [' + data.tick_count.toString().padStart(4, '0') + ']');
+    this.timerInfo = 'In Progress [' + data.tick_count.toString().padStart(4, '0') + ']';
   }
 
   onStart(data) {
-    console.log('Started.');
+    console.log('Timer started.');
   }
 
   doActionBasicTimer(action: String) {
