@@ -19,7 +19,6 @@ export interface TimeInterface {
 })
 export class CdTimerComponent implements AfterViewInit, OnDestroy {
   private timeoutId: any;
-  private isRunning: boolean;
   private tickCounter: number;
   private ngContentNode: any;
   private ngContentSchema: string;
@@ -48,12 +47,11 @@ export class CdTimerComponent implements AfterViewInit, OnDestroy {
     this.onTick     = new EventEmitter();
 
     this.autoStart  = true;
-    this.startTime  = null;
-    this.endTime    = null;
+    this.startTime  = 0;
+    this.endTime    = 0;
     this.timeoutId  = null;
-    this.countdown  = null;
-    this.isRunning  = false;
-    this.format     = null;
+    this.countdown  = false;
+    this.format     = 'default';
   }
 
   ngAfterViewInit() {
@@ -66,7 +64,6 @@ export class CdTimerComponent implements AfterViewInit, OnDestroy {
 
   ngOnDestroy() {
     this.resetTimeout();
-    this.isRunning = false;
   }
 
   /**
@@ -76,7 +73,6 @@ export class CdTimerComponent implements AfterViewInit, OnDestroy {
     this.initVar();
     this.resetTimeout();
     this.startTickCount();
-    this.isRunning = true;
 
     this.onStart.emit(this);
   }
@@ -88,7 +84,6 @@ export class CdTimerComponent implements AfterViewInit, OnDestroy {
     this.resetTimeout();
 
     this.startTickCount();
-    this.isRunning = true;
   }
 
   /**
@@ -106,9 +101,9 @@ export class CdTimerComponent implements AfterViewInit, OnDestroy {
   public reset() {
     this.initVar();
     this.resetTimeout();
-    this.startTickCount();
     this.clear();
-    this.isRunning = false;
+    this.calculateTimeUnits();
+    this.renderText();
   }
 
   /**
@@ -128,7 +123,7 @@ export class CdTimerComponent implements AfterViewInit, OnDestroy {
 
   private initVar() {
     this.startTime = this.startTime || 0;
-    this.endTime   = this.endTime || null;
+    this.endTime   = this.endTime || 0;
     this.countdown = this.countdown || false;
     this.tickCounter = this.startTime;
 
@@ -154,16 +149,16 @@ export class CdTimerComponent implements AfterViewInit, OnDestroy {
     if (this.format === 'user') {
       // User presentation
       const items = {
-        seconds: this.seconds,
-        minutes: this.minutes,
-        hours: this.hours,
-        days: this.days
+        'seconds': this.seconds,
+        'minutes': this.minutes,
+        'hours': this.hours,
+        'days': this.days
       };
 
       outputText = this.ngContentSchema;
 
       for (const key of Object.keys(items)) {
-        outputText = outputText.replace('[' + key + ']', items[key].toString());
+        outputText = outputText.replace('[' + key + ']', (items as any)[key].toString());
       }
     } else if (this.format === 'intelli') {
       // Intelli presentation
@@ -199,7 +194,6 @@ export class CdTimerComponent implements AfterViewInit, OnDestroy {
   private clear() {
     this.resetTimeout();
     this.timeoutId = null;
-    this.isRunning = false;
   }
 
   protected calculateTimeUnits() {
