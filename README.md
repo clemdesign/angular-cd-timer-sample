@@ -2,9 +2,11 @@
 
 This is a sample to use [cd-timer](https://github.com/clemdesign/angular-cd-timer) with [Angular](https://angular.io/) 4.
 
+This sample is viewable [here](http://angular-cd-timer.clemdesign.fr/).
+
 ## Usage
 
-Clone this repository on your disk.
+Clone the repository `https://github.com/clemdesign/angular-cd-timer-sample.git` on your disk.
 
 ## Development server
 
