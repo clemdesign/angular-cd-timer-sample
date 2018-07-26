@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
-import {CdTimerModule} from '../frameworks/cd-timer.module';
+import {CdTimerModule} from '../lib/cd-timer.module';
 
 
 @NgModule({

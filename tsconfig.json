@@ -1,13 +1,24 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "outDir": "./dist/out-tsc",
-    "sourceMap": true,
-    "declaration": false,
-    "moduleResolution": "node",
+    "declaration": true,
+    "stripInternal": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "module": "es2015",
+    "moduleResolution": "node",
+    "paths": {
+      "@angular/core": ["node_modules/@angular/core"],
+      "rxjs/*": ["node_modules/rxjs/*"]
+    },
+    "baseUrl": ".",
+    "outDir": "dist/out-tsc",
+    "sourceMap": true,
+    "inlineSources": true,
     "target": "es5",
+    "skipLibCheck": true,
     "typeRoots": [
       "node_modules/@types"
     ],
@@ -15,5 +26,11 @@
       "es2017",
       "dom"
     ]
+  },
+  "files": [
+    "src/lib/index.ts"
+  ],
+  "angularCompilerOptions": {
+    "strictMetadataEmit": true
   }
 }
