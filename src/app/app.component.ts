@@ -7,7 +7,7 @@ import {CdTimerComponent, TimeInterface} from '../dev-lib/index';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  @ViewChild('basicTimer') basicTimer: CdTimerComponent;
+  @ViewChild('basicTimer', { static: true }) basicTimer: CdTimerComponent;
 
   timerInfo = '';
 
