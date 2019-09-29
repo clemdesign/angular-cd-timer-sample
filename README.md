@@ -1,6 +1,6 @@
 # Angular-Cd-Timer-Sample
 
-This is a sample to use [cd-timer](https://github.com/clemdesign/angular-cd-timer) with [Angular](https://angular.io/) 4.
+This is a sample to use [cd-timer](https://github.com/clemdesign/angular-cd-timer) with [Angular](https://angular.io/) 4 or upper.
 
 This sample is viewable [here](http://angular-cd-timer.clemdesign.fr/).
 
