@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {CdTimerComponent, TimeInterface} from '../dev-lib/index';
+import {CdTimerComponent, TimeInterface} from 'angular-cd-timer';
 
 @Component({
   selector: 'app-root',
