@@ -1,10 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-
 import { AppComponent } from './app.component';
-import {CdTimerModule} from 'angular-cd-timer';
-
+import {CdTimerModule} from '../dev-lib/cd-timer.module';
 
 @NgModule({
   declarations: [
