@@ -19,7 +19,7 @@
   <h1>Basic Exemple</h1>
   <p>This simple integration <code>&lt;cd-timer&gt;&lt;/cd-timer&gt;</code> will start the timer with the default option of ticking every 1 second:</p>
   <p><cd-timer #basicTimer class="bootstrap-timer"></cd-timer></p>
-  <p>By binding timer with <code>@ViewChild('basicTimer')</code>, you can control the timer:</p>
+  <p>By binding timer with <code>@ViewChild('basicTimer')</code> and markup <code>&lt;cd-timer #basicTimer&gt;&lt;/cd-timer&gt;</code>, you can control the timer:</p>
   <p>
     <button type="button" (click)="doActionBasicTimer('start')">Start</button>
     <button type="button" (click)="doActionBasicTimer('stop')">Stop</button>
@@ -69,7 +69,7 @@
 </section>
 <section>
   <h1>Countdown Timer</h1>
-  <p><code>cd-timer</code> allow to configure countdown with this markup <code>&lt;cd-timer countdwon="true" [startTime]="100"&gt;&lt;/cd-timer&gt;</code> </p>
+  <p><code>cd-timer</code> allow to configure countdown with this markup <code>&lt;cd-timer countdown="true" [startTime]="100"&gt;&lt;/cd-timer&gt;</code> </p>
   <p><cd-timer class="bootstrap-timer" format="intelli" [startTime]="65" [countdown]="true"></cd-timer></p>
 </section>
 <section>
